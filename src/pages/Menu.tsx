@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -8,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { useCart } from "@/contexts/CartContext";
 
 // Типы данных
 interface PizzaItem {
@@ -24,6 +24,7 @@ interface PizzaItem {
 
 const Menu = () => {
   const { toast } = useToast();
+  const { addItem } = useCart();
   const [activeCategory, setActiveCategory] = useState("meat");
 
   // Данные о пиццах
@@ -143,6 +144,14 @@ const Menu = () => {
 
   // Функция добавления в корзину
   const addToCart = (pizza: PizzaItem) => {
+    addItem({
+      id: pizza.id,
+      name: pizza.name,
+      price: pizza.price,
+      image: pizza.image,
+      description: pizza.description
+    });
+    
     toast({
       title: "Товар добавлен в корзину",
       description: `${pizza.name} (${pizza.price} ₽) добавлен в вашу корзину`

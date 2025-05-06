@@ -5,6 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/hooks/use-toast";
 
 const pizzas = [
   {
@@ -52,6 +54,24 @@ const reviews = [
 ];
 
 const Index = () => {
+  const { addItem } = useCart();
+  const { toast } = useToast();
+
+  const handleAddToCart = (pizza) => {
+    addItem({
+      id: pizza.id,
+      name: pizza.name,
+      price: pizza.price,
+      image: pizza.image,
+      description: pizza.description
+    });
+    
+    toast({
+      title: "Товар добавлен в корзину",
+      description: `${pizza.name} (${pizza.price} ₽) добавлен в вашу корзину`
+    });
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Хедер */}
@@ -64,8 +84,8 @@ const Index = () => {
             <h2 className="text-4xl font-bold text-gray-800 mb-4">Вкуснейшая пицца с доставкой</h2>
             <p className="text-gray-600 mb-6 text-lg">Домашняя пицца из итальянской печи прямо к вашей двери за 30 минут!</p>
             <div className="flex space-x-4">
-              <Button size="lg" className="bg-red-600 hover:bg-red-700">
-                Заказать
+              <Button asChild size="lg" className="bg-red-600 hover:bg-red-700">
+                <Link to="/cart">Заказать</Link>
               </Button>
               <Button size="lg" variant="outline" className="border-red-600 text-red-600 hover:bg-red-50">
                 <Link to="/menu">Смотреть меню</Link>
@@ -100,7 +120,10 @@ const Index = () => {
                     <span className="text-lg font-bold text-red-600">{pizza.price} ₽</span>
                   </div>
                   <p className="text-gray-600 mb-4">{pizza.description}</p>
-                  <Button className="w-full bg-red-600 hover:bg-red-700">
+                  <Button 
+                    className="w-full bg-red-600 hover:bg-red-700"
+                    onClick={() => handleAddToCart(pizza)}
+                  >
                     Добавить в корзину
                   </Button>
                 </CardContent>

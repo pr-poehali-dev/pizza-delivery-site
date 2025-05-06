@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -7,10 +6,14 @@ import {
   SheetContent,
   SheetTrigger
 } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Menu, ShoppingCart } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { Badge } from "@/components/ui/badge";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { getTotalItems } = useCart();
+  const cartItemsCount = getTotalItems();
 
   return (
     <header className="bg-white shadow-md py-4 sticky top-0 z-10">
@@ -20,7 +23,15 @@ export const Header = () => {
         </div>
         
         {/* Мобильное меню */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center gap-4">
+          <Link to="/cart" className="relative">
+            <ShoppingCart className="h-6 w-6 text-gray-700" />
+            {cartItemsCount > 0 && (
+              <Badge className="absolute -top-2 -right-2 bg-red-600 text-white h-5 w-5 flex items-center justify-center p-0 text-xs rounded-full">
+                {cartItemsCount}
+              </Badge>
+            )}
+          </Link>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" aria-label="Меню">
@@ -48,7 +59,7 @@ export const Header = () => {
                   className="text-gray-700 hover:text-red-600 font-medium py-2"
                   onClick={() => setIsOpen(false)}
                 >
-                  Корзина
+                  Корзина {cartItemsCount > 0 && `(${cartItemsCount})`}
                 </Link>
                 <Link 
                   to="/contacts" 
@@ -79,14 +90,23 @@ export const Header = () => {
         <nav className="hidden md:flex space-x-6">
           <Link to="/" className="text-gray-700 hover:text-red-600 font-medium">Главная</Link>
           <Link to="/menu" className="text-gray-700 hover:text-red-600 font-medium">Меню</Link>
-          <Link to="/cart" className="text-gray-700 hover:text-red-600 font-medium">Корзина</Link>
           <Link to="/contacts" className="text-gray-700 hover:text-red-600 font-medium">Контакты</Link>
           <Link to="/about" className="text-gray-700 hover:text-red-600 font-medium">О нас</Link>
         </nav>
         
-        <Button className="hidden md:inline-flex bg-red-600 hover:bg-red-700">
-          Заказать сейчас
-        </Button>
+        <div className="hidden md:flex items-center gap-4">
+          <Link to="/cart" className="relative">
+            <ShoppingCart className="h-6 w-6 text-gray-700" />
+            {cartItemsCount > 0 && (
+              <Badge className="absolute -top-2 -right-2 bg-red-600 text-white h-5 w-5 flex items-center justify-center p-0 text-xs rounded-full">
+                {cartItemsCount}
+              </Badge>
+            )}
+          </Link>
+          <Button className="bg-red-600 hover:bg-red-700">
+            Заказать сейчас
+          </Button>
+        </div>
       </div>
     </header>
   );
