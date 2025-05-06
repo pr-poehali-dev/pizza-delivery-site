@@ -1,9 +1,10 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import Icon from "@/components/ui/Icon";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 const pizzas = [
   {
@@ -54,23 +55,7 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Хедер */}
-      <header className="bg-white shadow-md py-4">
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <div className="flex items-center">
-            <h1 className="text-2xl font-bold text-red-600">ПиццаМания</h1>
-          </div>
-          <nav className="hidden md:flex space-x-6">
-            <Link to="/" className="text-gray-700 hover:text-red-600 font-medium">Главная</Link>
-            <Link to="/menu" className="text-gray-700 hover:text-red-600 font-medium">Меню</Link>
-            <Link to="/order" className="text-gray-700 hover:text-red-600 font-medium">Заказ</Link>
-            <Link to="/contacts" className="text-gray-700 hover:text-red-600 font-medium">Контакты</Link>
-            <Link to="/about" className="text-gray-700 hover:text-red-600 font-medium">О нас</Link>
-          </nav>
-          <Button className="bg-red-600 hover:bg-red-700">
-            Заказать сейчас
-          </Button>
-        </div>
-      </header>
+      <Header />
 
       {/* Баннер */}
       <section className="bg-red-50 py-16">
@@ -83,7 +68,7 @@ const Index = () => {
                 Заказать
               </Button>
               <Button size="lg" variant="outline" className="border-red-600 text-red-600 hover:bg-red-50">
-                Смотреть меню
+                <Link to="/menu">Смотреть меню</Link>
               </Button>
             </div>
           </div>
@@ -177,52 +162,7 @@ const Index = () => {
       </section>
 
       {/* Футер */}
-      <footer className="bg-gray-800 text-white py-10">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">ПиццаМания</h3>
-              <p className="text-gray-300">Лучшая пицца в городе с доставкой на дом!</p>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Меню</h4>
-              <ul className="space-y-2">
-                <li><Link to="/menu" className="text-gray-300 hover:text-white">Пицца</Link></li>
-                <li><Link to="/menu" className="text-gray-300 hover:text-white">Напитки</Link></li>
-                <li><Link to="/menu" className="text-gray-300 hover:text-white">Десерты</Link></li>
-                <li><Link to="/menu" className="text-gray-300 hover:text-white">Соусы</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Информация</h4>
-              <ul className="space-y-2">
-                <li><Link to="/about" className="text-gray-300 hover:text-white">О нас</Link></li>
-                <li><Link to="/contacts" className="text-gray-300 hover:text-white">Контакты</Link></li>
-                <li><Link to="/delivery" className="text-gray-300 hover:text-white">Доставка</Link></li>
-                <li><Link to="/faq" className="text-gray-300 hover:text-white">FAQ</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Контакты</h4>
-              <address className="text-gray-300 not-italic">
-                <p>ул. Пиццы, 123</p>
-                <p>Москва, Россия</p>
-                <p className="mt-2">Телефон: <a href="tel:+78001234567" className="hover:text-white">8 (800) 123-45-67</a></p>
-                <p>Email: <a href="mailto:info@pizzamania.ru" className="hover:text-white">info@pizzamania.ru</a></p>
-              </address>
-            </div>
-          </div>
-          <div className="mt-8 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400">© {new Date().getFullYear()} ПиццаМания. Все права защищены.</p>
-            <div className="flex space-x-4 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-white"><Icon name="Instagram" /></a>
-              <a href="#" className="text-gray-400 hover:text-white"><Icon name="Facebook" /></a>
-              <a href="#" className="text-gray-400 hover:text-white"><Icon name="Twitter" /></a>
-              <a href="#" className="text-gray-400 hover:text-white"><Icon name="Youtube" /></a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
