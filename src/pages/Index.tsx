@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import Icon from "@/components/ui/Icon";
+import { Star } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -109,7 +109,7 @@ const Index = () => {
           </div>
           <div className="text-center mt-10">
             <Button variant="outline" size="lg" className="border-red-600 text-red-600 hover:bg-red-50">
-              Смотреть все меню
+              <Link to="/menu">Смотреть все меню</Link>
             </Button>
           </div>
         </div>
@@ -125,11 +125,10 @@ const Index = () => {
                 <div className="flex items-center mb-4">
                   <div className="flex text-yellow-400 mr-2">
                     {[...Array(5)].map((_, i) => (
-                      <Icon 
+                      <Star 
                         key={i} 
-                        name={i < review.rating ? "Star" : "StarOff"} 
                         size={16}
-                        className={i < review.rating ? "text-yellow-400" : "text-gray-300"}
+                        className={i < review.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}
                       />
                     ))}
                   </div>

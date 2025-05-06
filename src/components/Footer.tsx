@@ -1,6 +1,5 @@
-
 import { Link } from "react-router-dom";
-import Icon from "@/components/ui/Icon";
+import { Instagram, Facebook, Twitter, Youtube } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -42,10 +41,10 @@ export const Footer = () => {
         <div className="mt-8 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400">© {new Date().getFullYear()} ПиццаМания. Все права защищены.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
-            <a href="#" className="text-gray-400 hover:text-white"><Icon name="Instagram" /></a>
-            <a href="#" className="text-gray-400 hover:text-white"><Icon name="Facebook" /></a>
-            <a href="#" className="text-gray-400 hover:text-white"><Icon name="Twitter" /></a>
-            <a href="#" className="text-gray-400 hover:text-white"><Icon name="Youtube" /></a>
+            <a href="#" className="text-gray-400 hover:text-white"><Instagram size={20} /></a>
+            <a href="#" className="text-gray-400 hover:text-white"><Facebook size={20} /></a>
+            <a href="#" className="text-gray-400 hover:text-white"><Twitter size={20} /></a>
+            <a href="#" className="text-gray-400 hover:text-white"><Youtube size={20} /></a>
           </div>
         </div>
       </div>
